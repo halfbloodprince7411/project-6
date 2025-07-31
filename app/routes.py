@@ -2,6 +2,9 @@ import msal
 from flask import Blueprint, render_template, request, redirect, session, url_for, current_app
 from .auth import is_teacher_claims  # Updated role check for claims
 from .data import get_students
+from flask import current_app
+from flask import current_app, url_for, redirect
+
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -35,9 +38,6 @@ def index():
 # Replace old /login with MSAL login flow
 @main_routes.route("/login")
 def login():
-    print("=== /login route hit ===", flush=True)
-    print(f"SERVER_NAME: {app.config.get('SERVER_NAME')}", flush=True)
-    print(f"REDIRECT_PATH: {app.config.get('REDIRECT_PATH')}", flush=True)
     print("🔑 /login route hit", flush=True)
     print("SERVER_NAME:", current_app.config['SERVER_NAME'], flush=True)
     print("REDIRECT_PATH:", current_app.config['REDIRECT_PATH'], flush=True)
