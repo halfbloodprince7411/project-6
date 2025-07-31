@@ -17,6 +17,9 @@ def create_app():
     app.config['SESSION_TYPE'] = SESSION_TYPE  # should be 'filesystem'
     app.config['SERVER_NAME'] = 'localhost:5001'
 
+     # Debug print to confirm secret loaded
+    print("Loaded CLIENT_ID from config:", app.config['CLIENT_ID'])
+
     # ✅ Initialize session
     Session(app)
 
