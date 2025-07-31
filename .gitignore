@@ -1,12 +1,4 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*/__pycache__/
-
-# Flask session files
 flask_session/
-
-# Virtual environment folder
-venv/
-
-# Your specific file to ignore
 sp.txt
+venv/
+__pycache__/
