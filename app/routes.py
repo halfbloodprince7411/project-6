@@ -110,3 +110,14 @@ def student():
 @main_routes.route("/unauthorized")
 def unauthorized():
     return render_template("unauthorized.html")
+
+@main_routes.route("/debug-secrets")
+def debug_secrets():
+    from app.azure_keyvault import get_secret
+    try:
+        client_id = get_secret("client-id")
+        tenant_id = get_secret("tenant-id")
+        return f"✅ Successfully fetched secrets.<br>CLIENT_ID: {client_id}<br>TENANT_ID: {tenant_id}"
+    except Exception as e:
+        return f"❌ Error fetching secrets from Key Vault: {e}"
+
