@@ -35,12 +35,15 @@ def index():
 # Replace old /login with MSAL login flow
 @main_routes.route("/login")
 def login():
-    print("🔑 /login route hit")
-    print("SERVER_NAME:", current_app.config['SERVER_NAME'])
-    print("REDIRECT_PATH:", current_app.config['REDIRECT_PATH'])
+    print("=== /login route hit ===", flush=True)
+    print(f"SERVER_NAME: {app.config.get('SERVER_NAME')}", flush=True)
+    print(f"REDIRECT_PATH: {app.config.get('REDIRECT_PATH')}", flush=True)
+    print("🔑 /login route hit", flush=True)
+    print("SERVER_NAME:", current_app.config['SERVER_NAME'], flush=True)
+    print("REDIRECT_PATH:", current_app.config['REDIRECT_PATH'], flush=True)
 
     redirect_uri = url_for("main_routes.authorized", _external=True)
-    print("Redirect URI being sent:", redirect_uri)
+    print("Redirect URI being sent:", redirect_uri, flush=True)
 
     msal_app = _build_msal_app()
     auth_url = msal_app.get_authorization_request_url(
@@ -48,6 +51,7 @@ def login():
         redirect_uri=redirect_uri
     )
     return redirect(auth_url)
+
 
 
 # MSAL callback endpoint
