@@ -33,10 +33,15 @@ def index():
 @main_routes.route("/login")
 def login():
     print("🔑 /login route hit")
+    print("SERVER_NAME:", current_app.config['SERVER_NAME'])
+    print("REDIRECT_PATH:", current_app.config['REDIRECT_PATH'])
+    redirect_uri = url_for("main_routes.authorized", _external=True)
+    print("Redirect URI being sent:", redirect_uri)
+
     msal_app = _build_msal_app()
     auth_url = msal_app.get_authorization_request_url(
         scopes=current_app.config['SCOPES'],
-        redirect_uri=url_for("main_routes.authorized", _external=True)
+        redirect_uri=redirect_uri
     )
     return redirect(auth_url)
 
