@@ -2,9 +2,13 @@ from flask import Flask
 from flask_session import Session
 from app.config import *
 from app.routes import main_routes
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 def create_app():
     app = Flask(__name__)
+    # Trust Azure's reverse proxy headers (like X-Forwarded-Proto)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
     app.secret_key = "super-secret-key"  # Replace with secure secret in production
 
     # Load Azure AD config from config.py (dynamic values for SERVER_NAME, REDIRECT_PATH, AUTHORITY)
