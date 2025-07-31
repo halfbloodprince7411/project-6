@@ -2,6 +2,9 @@ import msal
 from flask import Blueprint, render_template, request, redirect, session, url_for, current_app
 from .auth import is_teacher_claims  # Updated role check for claims
 from .data import get_students
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -35,6 +38,7 @@ def login():
     print("🔑 /login route hit")
     print("SERVER_NAME:", current_app.config['SERVER_NAME'])
     print("REDIRECT_PATH:", current_app.config['REDIRECT_PATH'])
+
     redirect_uri = url_for("main_routes.authorized", _external=True)
     print("Redirect URI being sent:", redirect_uri)
 
@@ -44,6 +48,7 @@ def login():
         redirect_uri=redirect_uri
     )
     return redirect(auth_url)
+
 
 # MSAL callback endpoint
 @main_routes.route("/authorized")
