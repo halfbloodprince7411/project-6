@@ -15,9 +15,12 @@ SESSION_TYPE = "filesystem"
 if os.getenv("AZURE_ENV") == "PRODUCTION":
     SERVER_NAME = "ncpl-training-app-47fb6d.azurewebsites.net"
     REDIRECT_PATH = "/authorized"
+    REDIRECT_URI = f"https://{SERVER_NAME}{REDIRECT_PATH}"
 else:
     SERVER_NAME = "localhost:5001"
-    REDIRECT_PATH = "/authorized"
+    REDIRECT_PATH = "/login"
+    REDIRECT_URI = f"http://{SERVER_NAME}{REDIRECT_PATH}"
+
 
 # Final AUTHORITY depends on TENANT_ID
 AUTHORITY = f"https://login.microsoftonline.com/{TENANT_ID}"
