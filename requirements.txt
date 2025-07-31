@@ -20,6 +20,7 @@ Deprecated==1.2.18
 executing==2.2.0
 fixedint==0.1.6
 Flask==3.0.0
+Flask-Session
 git-filter-repo==2.47.0
 gunicorn==21.2.0
 idna==3.10
