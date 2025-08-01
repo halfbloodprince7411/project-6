@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.get('name', 'Teacher') }}!</h2>
+
+    <h3>Teachers List</h3>
+    {% if teachers %}
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.id }}</td>
+                <td>{{ teacher.name }}</td>
+                <td>{{ teacher.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No teacher records found.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('main_routes.students') }}">View Students</a></p>
+    <p><a href="{{ url_for('main_routes.logout') }}">Logout</a></p>
+</body>
+</html>

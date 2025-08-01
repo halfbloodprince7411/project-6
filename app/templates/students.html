@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.get('name', 'User') }}!</h2>
+
+    <h3>Students List</h3>
+    {% if students %}
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Enrolled</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ 'Yes' if student.enrolled else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No student records found.</p>
+    {% endif %}
+
+    {% if is_teacher %}
+    <p><a href="{{ url_for('main_routes.teachers') }}">View Teachers</a></p>
+    {% endif %}
+
+    <p><a href="{{ url_for('main_routes.logout') }}">Logout</a></p>
+</body>
+</html>

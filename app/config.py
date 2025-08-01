@@ -1,6 +1,9 @@
 import os
 from app.azure_keyvault import get_secret
 
+SQL_CONNECTION_STRING = get_secret("DbConnectionString")
+
+
 # Secure secrets from Azure Key Vault
 CLIENT_ID = get_secret("client-id")
 CLIENT_SECRET = get_secret("client-secret")
